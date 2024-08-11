@@ -11,7 +11,7 @@ const apiUrl = 'https://radiant-lake-01596-6878ff7c62df.herokuapp.com/';
   providedIn: 'root'
 })
 
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
@@ -62,9 +62,9 @@ export class UserRegistrationService {
   }
 
   //make api call to the endpoint for a single director 
-  getOneDirector(directorName: string): Observable<any> {
+  getOneDirector(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies/directors/' + directorName, {
+    return this.http.get(apiUrl + 'movies/directors/', {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -90,21 +90,13 @@ export class UserRegistrationService {
   }
 
   //make api call to the endpoint for a single user
-  getOneUser(userName: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'users/' + userName, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+  getOneUser(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user;
   }
 
   //make api call to a single user's favorite movies endpoint 
-  getUsersMovies(genreName: string): Observable<any> {
+  getUsersMovies(genreName: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/movies/' + genreName, {
       headers: new HttpHeaders(
@@ -119,9 +111,10 @@ export class UserRegistrationService {
   }
 
   //make api call to add a movie to a users favorites 
-  addFavMovies(userName: string, movieID: string): Observable<any> {
+  addFavMovies(movie: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + `users/${userName}/movies/${movieID}`, {
+    return this.http.post(apiUrl + `users/${user.Username}/movies/${movie._id}`, {}, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -132,9 +125,9 @@ export class UserRegistrationService {
     );
   }
   //make api call to edit a users info 
-  editUserProfile(userName: string): Observable<any> {
+  editUserProfile(userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + userName, {
+    return this.http.put(apiUrl + 'users/' + userDetails.Username, userDetails, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -146,9 +139,10 @@ export class UserRegistrationService {
   }
 
   //make api call to delete a user's account
-  deleteUser(userName: string): Observable<any> {
+  deleteUser(): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + userName, {
+    return this.http.delete(apiUrl + 'users/' + user.Username, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -160,9 +154,10 @@ export class UserRegistrationService {
   }
 
   //make api call to delete a movie from a user's favorites
-  deleteMovie(userName: string, movieID: string): Observable<any> {
+  deleteMovie(movie: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + `users/${userName}/movies/${movieID}`, {
+    return this.http.delete(apiUrl + `users/${user.Username}/movies/${movie._id}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -187,7 +182,7 @@ export class UserRegistrationService {
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`);
     }
-    return throwError(
-      'Something bad happened - please try again later.');
+    return throwError(() =>
+      new Error('Something bad happened - please try again later.'));
   }
 }

@@ -1,0 +1,33 @@
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center content vertically */
+  flex-wrap: wrap;
+  min-height: 100vh; /* Ensure full viewport height */
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Add a gradient background */
+  text-align: center; /* Center text */
+  padding: 20px;
+}
+
+h1 {
+  font-size: 60px; /* Adjusted font size for better readability */
+  margin-top: 0; /* Remove unnecessary top margin */
+  color: #ffffff; /* Change text color to white for better contrast */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+  font-family: 'Roboto', sans-serif; /* Use a modern, clean font */
+  font-weight: bold; /* Make the text bold */
+  letter-spacing: 2px; /* Add some spacing between letters */
+  animation: fadeIn 1.5s ease-in-out; /* Add a fade-in animation */
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below and move upwards */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at the original position */
+  }
+}

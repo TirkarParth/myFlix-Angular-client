@@ -1,0 +1,72 @@
+.movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 30px; /* Increase the gap for better spacing */
+  padding: 60px 20px; /* Add padding to give more space around the cards */
+  background-color: #ff7e5f; /* Light background for contrast */
+  position: relative;
+  top: 60px; /* Adjust the top position for better alignment */
+  border-radius: 8px; /* Add rounded corners to the container */
+}
+
+.movie-cards {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* White background for the cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  border-radius: 12px; /* Rounded corners for the cards */
+  overflow: hidden; /* Ensure the image and content stay within the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.movie-cards:hover {
+  transform: translateY(-10px); /* Lift the card slightly on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.movie-card-img {
+  width: 220px; /* Slightly larger width */
+  height: 330px; /* Slightly larger height */
+  object-fit: cover; /* Ensure the image covers the entire space */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity on hover */
+}
+
+.movie-card-img:hover {
+  cursor: pointer;
+  opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+.movie-card-title {
+  font-size: 18px; /* Adjust font size for better readability */
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333; /* Darker color for the text */
+  text-align: center;
+}
+
+.movie-card-subtitle {
+  font-size: 14px; /* Adjust subtitle size */
+  color: #777; /* Lighter color for the subtitle */
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.mat-card-actions {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; /* Space out action buttons */
+  width: 100%;
+}
+
+.mat-card-actions button {
+  font-size: 14px; /* Adjust button text size */
+  color: #D7263D; /* Primary color for buttons */
+  transition: color 0.3s ease; /* Smooth transition for color on hover */
+}
+
+.mat-card-actions button:hover {
+  color: #B71C1C; /* Darken color on hover */
+}
