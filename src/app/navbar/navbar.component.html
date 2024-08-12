@@ -2,16 +2,23 @@
   <mat-toolbar>
     <span style="margin-left: 10px;">PT's Movie Flix</span>
     <span class="spacer"></span>
+
     <button mat-icon-button (click)="launchMovies()" class="movie-icon"
       aria-label="icon button with a clapperboard icon">
       <mat-icon>movie</mat-icon>
+      <span class="nav-text">Movies</span>
     </button>
+
     <button mat-icon-button (click)="launchProfile()" class="account-icon"
       aria-label="icon-button with account circle icon">
       <mat-icon>account_circle</mat-icon>
+      <span class="nav-text">Profile</span>
     </button>
-    <button mat-icon-button (click)="logoutUser()" class="logout-icon" aria-label="icon button with logout icon">
+
+    <button mat-icon-button (click)="logoutUser()" class="logout-icon" 
+      aria-label="icon button with logout icon">
       <mat-icon>logout</mat-icon>
+      <span class="nav-text">Logout</span>
     </button>
   </mat-toolbar>
 </div>
